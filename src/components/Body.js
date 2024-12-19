@@ -1,7 +1,9 @@
 import RestaurantCard from "./RestaurantCard";
 import ShimmerUI from "./ShimmerUI";
 import ShimmerUI from "./ShimmerUI";
+import useOnlineStatus from "../utils/useOnlineStatus";
 //import resList from "../utils/mockData";
+import { Link } from "react-router-dom";
 import {useState,useEffect} from "react";
 const Body = ()=>{
     const [restaurantList,setRestList] = useState([]);
@@ -20,6 +22,10 @@ const Body = ()=>{
          setFilterRes(datajson?.data?.cards[1]?.card ?.card?.gridElements?.infoWithStyle?.restaurants);
           
        }
+       if(useOnlineStatus() === false) {
+        return (<h1>Something went wrong !!. Check your internet </h1>)
+       }
+
        if(restaurantList.length === 0) {
         return (<ShimmerUI/>);
        }
@@ -49,7 +55,7 @@ const Body = ()=>{
             </div>
             <div className="resContainer">
                 {
-                    filterRestaurant?.map(restaurant => (<RestaurantCard  resData={restaurant} />)
+                    filterRestaurant?.map(restaurant => (<Link to={"/restaurants/"+restaurant?.info.id}><RestaurantCard  resData={restaurant}/> </Link>)
                     )
                 }
                 {/* <RestaurantCard  resData={resObj} /> */}

@@ -3,7 +3,7 @@ import { CDN_URL } from "../utils/constants";
 const cardStyle={
     backgroundColor:"#f0f0f0" ,
     padding:"2px",
-    margib:"2px" // for inline styling
+    margin:"2px" // for inline styling
 }
 const RestaurantCard=(props)=>{  
     const {resData} = props;  
