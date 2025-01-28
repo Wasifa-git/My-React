@@ -1,5 +1,9 @@
-import React from "react";
+import React,{useEffect,useContext, useState} from "react";
 import ReactDOM from "react-dom";
+import UserContext from "./src/utils/UserContext";
+
+
+  
 const Header = () => {
   return (
     <div className="header">
@@ -47,11 +51,24 @@ const Body = ()=>{
     )
 }
 const AppLayout = () => {
+  const [user,setUser] = useState();
+  useEffect(()=>{
+    // API call to fetch user for authentication
+     const data ={
+      name:"Wasifa"
+     }
+     setUser(data.name);
+ },[]);
+ console.log("user:",user)
   return (
+    <UserContext.Provider value={{loggedUser:user}}>
     <div className="app">
+      
       <Header/>
+      
       <Body/>
     </div>
+    </UserContext.Provider>
   );
 };
 
